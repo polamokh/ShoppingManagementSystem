@@ -49,32 +49,24 @@ public class Main {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize()
+	{
 		frame = new JFrame();
 		frame.setBounds(100, 100, 635, 405);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		Box horizontalBox = Box.createHorizontalBox();
+		horizontalBox.setBounds(0, 0, 619, 40);
 		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 47, 619, 311);
 		scrollPane.setViewportBorder(null);
-		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(horizontalBox, GroupLayout.PREFERRED_SIZE, 619, GroupLayout.PREFERRED_SIZE)
-				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(horizontalBox, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE))
-		);
 		
 		JButton btnClothesCategory = new JButton("Clothes");
-		btnClothesCategory.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		btnClothesCategory.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
 				MenuComponent clothes = new Category("Clothes");
 				clothes.add(new Product("Shirt", "Style: super comfortable, relaxed fit, lightweight and fashionable.", 200, 20));
 				clothes.add(new Product("Shoes", "Upper Material:Genuine Leather", 150, 10));
@@ -111,6 +103,8 @@ public class Main {
 		));
 		productsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(productsTable);
-		frame.getContentPane().setLayout(groupLayout);
+		frame.getContentPane().setLayout(null);
+		frame.getContentPane().add(horizontalBox);
+		frame.getContentPane().add(scrollPane);
 	}
 }

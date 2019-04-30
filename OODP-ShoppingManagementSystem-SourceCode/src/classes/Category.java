@@ -3,11 +3,14 @@ package classes;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Category extends MenuComponent {
+public class Category extends MenuComponent
+{
 	private String name;
 	private List<MenuComponent> products = new ArrayList<>();
 	
-	public Category(String name) {
+	
+	public Category(String name)
+	{
 		super();
 		this.name = name;
 	}

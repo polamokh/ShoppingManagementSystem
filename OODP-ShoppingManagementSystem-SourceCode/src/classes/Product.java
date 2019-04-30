@@ -8,7 +8,8 @@ public class Product extends MenuComponent {
 	private double price;
 	private int quantity;
 	
-	public Product() {
+	public Product()
+	{
 		super();
 	}
 
