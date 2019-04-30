@@ -2,7 +2,7 @@ package classes;
 
 import java.util.List;
 
-public class Product extends MenuComponent {
+public class Product implements MenuComponent {
 	private String name;
 	private String description;
 	private double price;
@@ -61,4 +61,10 @@ public class Product extends MenuComponent {
 	public List<MenuComponent> getProducts() {
 		return null;
 	}
+
+	@Override
+	public void add(MenuComponent menuComponent) { }
+
+	@Override
+	public void remove(MenuComponent menuComponent) { }
 }
