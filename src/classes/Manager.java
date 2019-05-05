@@ -4,22 +4,57 @@ import java.util.ArrayList;
 
 public class Manager
 {
-	private ArrayList<DeliveryBoy> list=new ArrayList <DeliveryBoy>();
+	private WebPage onlineShopping;
 	 
 	
-	public  ArrayList<DeliveryBoy> getEmployee() 
+	public Manager(WebPage _OnlineShopping)
 	{
-		return list;
+		this.onlineShopping = _OnlineShopping;
+	}
+    
+	public void addProduct(Product _product) 
+	{
+		onlineShopping.addProduct(_product);
+	}
+	
+	public void addCategory(MenuComponent _category)
+	{
+		onlineShopping.addCategory(_category);
 	}
 
-	public void setEmployee(DeliveryBoy boy)
+	public void RemoveProduct(Product _product)
 	{
-		
-		list.add(boy);
+		onlineShopping.RemoveProduct(_product);
 	}
-     public void Remove(DeliveryBoy boy) 
-     {
-    	list.remove(boy);
-     }
-     
+	
+	public void RemoveCategory(MenuComponent _category)
+	{
+		onlineShopping.RemoveCategory(_category);
+	}
+	
+	public ArrayList<Order> getOrders()
+	{
+		return onlineShopping.getOrders();
+	}
+
+	public ArrayList<Bill> getBills()
+	{
+		return onlineShopping.getBills();
+	}
+
+	public void addDelivayBoy(DeliveryBoy _boy)
+	{
+		onlineShopping.addDelivayBoy(_boy);
+
+	}
+
+	public ArrayList<DeliveryBoy> getDelivaryBoys() 
+	{
+		return onlineShopping.getDelivaryBoys();
+	}
+	
+	public void RemoveDelivaryBoy(DeliveryBoy _boy)
+	{
+		onlineShopping.RemoveDelivaryBoy(_boy);
+	}
 }
