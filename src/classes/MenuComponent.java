@@ -11,4 +11,6 @@ public interface MenuComponent {
 	public abstract String getDescription();
 	public abstract double getPrice();
 	public abstract int getQuantity();
+
+	
 }

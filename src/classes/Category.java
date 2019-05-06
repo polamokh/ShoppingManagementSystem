@@ -7,6 +7,7 @@ public class Category implements MenuComponent {
 	private String name;
 	private List<MenuComponent> products = new ArrayList<>();
 	
+	
 	public Category(String name) {
 		super();
 		this.name = name;
@@ -19,7 +20,9 @@ public class Category implements MenuComponent {
 	public void remove(MenuComponent menuComponent) {
 		this.products.remove(menuComponent);
 	}
-
+	
+	
+	
 	@Override
 	public MenuComponent getChild(int i) {
 		return this.products.get(i);
