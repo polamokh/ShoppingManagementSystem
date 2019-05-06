@@ -1,6 +1,9 @@
 package classes;
 
+import java.util.ArrayList;
 import java.util.List;
+
+
 
 public interface MenuComponent {
 	public void add(MenuComponent menuComponent);
@@ -11,6 +14,6 @@ public interface MenuComponent {
 	public abstract String getDescription();
 	public abstract double getPrice();
 	public abstract int getQuantity();
-
-	
+    List<Observer> observers=new ArrayList<Observer>();
 }
+

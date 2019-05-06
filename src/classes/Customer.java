@@ -1,15 +1,18 @@
 package classes;
 import java.util.List;
+
+
 import java.util.ArrayList;
 
 public class Customer {
-	
 	private String Name;
 	private String Mobile;
 	private String password;
 	private String username;
+	private Product product;
+	private Order order;
 	
-	private List<Order> orders = new ArrayList<Order>();
+	private ArrayList<Order> orders = new ArrayList<Order>();
 	WebPage onlineShopping;
 	
 	public Customer(String Name,String Mobile,String password,String username)
@@ -18,9 +21,12 @@ public class Customer {
 		this.Mobile=Mobile;
 		this.password=password;
 		this.username=username;
-		onlineShopping = new WebPage();
 	}
-	
+    public void add(Order order)
+    {
+	   orders.add(order);
+    }
+    
     public void SetName(String Name)
     {
 	   this.Name=Name;
@@ -53,27 +59,41 @@ public class Customer {
     {
     	return username;
     }
-   
-   
     
-    
+    public void MakeOrder(Order order)
+    {
+    		orders.add(order);
+    }
+    public void RemoveOrder(Order order)
+    {
+    	orders.remove(order);
+    }
     public ArrayList<MenuComponent> getCategory()
-	{
-		return onlineShopping.getCategory();
-	}
+   	{
+   		return onlineShopping.getCategory();
+   	}
+    public ArrayList<Order> getOrder()
+    {
+    	return orders;
+    }
+   	public ArrayList<MenuComponent> getCategoryProducts(MenuComponent _category)
+   	{
+   		return onlineShopping.getCategoryProducts(_category);
+   	}
 
-	public ArrayList<MenuComponent> getCategoryProducts(MenuComponent _category)
-	{
-		return onlineShopping.getCategoryProducts(_category);
-	}
+   	public ArrayList<Product> getProducts()
+   	{
+   		return onlineShopping.getProducts();
+   	}
 
-	public ArrayList<Product> getProducts()
-	{
-		return onlineShopping.getProducts();
-	}
-
-	public Bill BuyProduct(ArrayList<String> _productsName, String _date)
-	{
-		return onlineShopping.BuyProduct(_productsName, this, _date);
-	}
+   	public Bill BuyProduct(ArrayList<String> _productsName, String _date)
+   	{
+   		return onlineShopping.BuyProduct(_productsName, this, _date);
+   	}
+//    public void ProductNotification(Product product)
+//	{
+//	      this.product = product;
+//	      this.product.addproduct(this);
+//	}
+     
 }

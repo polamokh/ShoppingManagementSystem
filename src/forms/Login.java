@@ -77,59 +77,60 @@ public class Login extends JFrame {
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 // The name of the file to open.
-				//List<Customer> customers = new ArrayList<Customer>();
-		        String fileName = "Customers.txt";
-
-		        // This will reference one line at a time
-		        String line = null;
-                
-		        try {
-		            // FileReader reads text files in the default encoding.
-		            FileReader fileReader = 
-		                new FileReader(fileName);
-
-		            // Always wrap FileReader in BufferedReader.
-		            BufferedReader bufferedReader = 
-		                new BufferedReader(fileReader);
-		            int namee=0,passwordd=0;
-		            String n=username.getText().toString();
-		            String pass=password.getText().toString();
-		            while((line = bufferedReader.readLine()) != null) {
-		            	 System.out.println(line);
-		            	 System.out.println(username.getText().toString());
-		            	 String l=line;
-		                if(l==n)
-		                {
-		                	namee=1;
-		                }
-		                if(l==pass)
-		                {
-		                	passwordd=1;
-		                }
-		            }   
-		            System.out.println(namee);
-		            System.out.println(passwordd);
-                    if(namee==1&&passwordd==1)
-                    {
-                    	JOptionPane.showMessageDialog(null, username.getText());
-                    }
-		            // Always close files.
-		            bufferedReader.close();         
-		        }
-		        catch(FileNotFoundException ex) {
-		            System.out.println(
-		                "Unable to open file '" + 
-		                fileName + "'");                
-		        }
-		        catch(IOException ex) {
-		            System.out.println(
-		                "Error reading file '" 
-		                + fileName + "'");                  
-		            // Or we could just do this: 
-		            // ex.printStackTrace();
-		        }
-
+				
+//				 // The name of the file to open.
+//				//List<Customer> customers = new ArrayList<Customer>();
+//		       // String fileName = "Customers.txt";
+//
+//		        // This will reference one line at a time
+//		        String line = null;
+//                
+//		        try {
+//		            // FileReader reads text files in the default encoding.
+//		            FileReader fileReader = 
+//		                new FileReader(fileName);
+//
+//		            // Always wrap FileReader in BufferedReader.
+//		            BufferedReader bufferedReader = 
+//		                new BufferedReader(fileReader);
+//		            int namee=0,passwordd=0;
+//		            String n=username.getText().toString();
+//		            String pass=password.getText().toString();
+//		            while((line = bufferedReader.readLine()) != null) {
+//		            	 System.out.println(line);
+//		            	 System.out.println(username.getText().toString());
+//		            	 String l=line;
+//		                if(l==n)
+//		                {
+//		                	namee=1;
+//		                }
+//		                if(l==pass)
+//		                {
+//		                	passwordd=1;
+//		                }
+//		            }   
+//		            System.out.println(namee);
+//		            System.out.println(passwordd);
+//                    if(namee==1&&passwordd==1)
+//                    {
+//                    	JOptionPane.showMessageDialog(null, username.getText());
+//                    }
+//		            // Always close files.
+//		            bufferedReader.close();         
+//		        }
+//		        catch(FileNotFoundException ex) {
+//		            System.out.println(
+//		                "Unable to open file '" + 
+//		                fileName + "'");                
+//		        }
+//		        catch(IOException ex) {
+//		            System.out.println(
+//		                "Error reading file '" 
+//		                + fileName + "'");                  
+//		            // Or we could just do this: 
+//		            // ex.printStackTrace();
+//		        }
+//
 			}
 			
 		});
