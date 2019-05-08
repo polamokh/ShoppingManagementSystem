@@ -4,15 +4,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-	String order;
-	String ordernumber;
+	
+	private String order;
 	private List<Product> products = new ArrayList<Product>();
-	public Product product;
+	
 	void add(Product product)
 	{
 		products.add(product);
 	}
+	void SetOrder(String _order)
+	{
+		this.order = _order;
+	}
+	String GetOrder()
+	{
+		return order;
+	}
 	
+	public List<Product> getProducts()
+    {
+    	return products;
+    }
+    
+    public void setProducts(List<Product> _product)
+    {
+    	this.products = _product;
+    }
+    
+	/*
 	void SetOrdernumber(String ordernumber)
 	{
 		this.ordernumber=ordernumber;
@@ -21,14 +40,9 @@ public class Order {
 	{
 		return ordernumber;
 	}
-	void SetOrder(String order)
-	{
-		this.order=order;
-	}
-	String GetOrder()
-	{
-		return order;
-	}
+	
+	*/
+	
     public boolean CheckProduct(String name)
      {
     	for(int i = 0; i < products.size(); i++)
@@ -41,9 +55,6 @@ public class Order {
     	 return false;
     	
      }
-    public List<Product> getProducts()
-    {
-    	return products;
-    }
-
+    
+    
 }

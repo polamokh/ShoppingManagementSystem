@@ -84,8 +84,8 @@ public class Main {
 				String name=textField.getText();
 				if(order.CheckProduct(name)==true)
 				{
-					customer.MakeOrder(order);
-					products.buyProduct();
+					//customer.MakeOrder(order);
+					//products.updateStock();
 				}
 				else JOptionPane.showMessageDialog(null,"Product Out of Stock");
 				
