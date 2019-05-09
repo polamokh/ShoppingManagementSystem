@@ -2,13 +2,15 @@ package classes;
 
 import java.util.ArrayList;
 
+import javafx.scene.shape.CullFace;
+
 public class Accountant 
 {
 	private ArrayList<Bill> Bills;
 	
 	public Accountant()
 	{
-		Bills = new ArrayList<Bill>();
+		Bills = new Bill().selectBill();
 	}
 	
 	public Bill prepareBill(int _billId, Customer _customer,  Order _order,
@@ -21,8 +23,14 @@ public class Accountant
 		newBill.setOrder(_order);
 		newBill.setDelivaryBoy(_boy);
 		newBill.setDate(_date);
-		newBill.calculateTotal();
-		newBill.SaveBill();
+		newBill.setTotalPrice(new Bill().calculateTotal(_order));
+		
+		newBill.insertBill(newBill);
+		
+		for(int i = 0; i < _order.getProducts().size(); i++)
+		{
+			new Product().updateStock(_order.getProducts().get(i));
+		}
 		
 		Bills.add(newBill);
 		

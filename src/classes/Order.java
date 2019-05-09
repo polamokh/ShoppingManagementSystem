@@ -4,42 +4,57 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-	Product p;
-	String order;
+	
+	private String order;
 	private List<Product> products = new ArrayList<Product>();
 	
 	void add(Product product)
 	{
 		products.add(product);
 	}
-	
-	void SetOrder(String order)
+	void SetOrder(String _order)
 	{
-		this.order=order;
+		this.order = _order;
 	}
-	
 	String GetOrder()
 	{
 		return order;
 	}
 	
-	
-    public boolean CheckProduct()
-     {
-    	
-    	int x=p.getQuantity();
-    	
-    	 if(x>0)
-    	 {
-    		 return true;
-    	 }
-    	 else return false; 
-     }
-
-    
-    public List<Product> getProducts()
+	public List<Product> getProducts()
     {
     	return products;
     }
-
+    
+    public void setProducts(List<Product> _product)
+    {
+    	this.products = _product;
+    }
+    
+	/*
+	void SetOrdernumber(String ordernumber)
+	{
+		this.ordernumber=ordernumber;
+	}
+	String GetOrdernumber()
+	{
+		return ordernumber;
+	}
+	
+	*/
+	
+    public boolean CheckProduct(String name)
+     {
+    	for(int i = 0; i < products.size(); i++)
+		{
+    		if(products.get(i).getName()==name&&products.get(i).getQuantity()>0)
+    		{
+    			return true;
+    		}
+		}
+    	 return false;
+    	
+     }
+    
+    
 }

@@ -69,38 +69,38 @@ public class Register extends JFrame {
 		btnRegister.setBackground(new Color(255, 255, 255));
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Customer c=new Customer(name.getText(),Mobile.getText(),password.getText(),username.getText());
-				String fileName = "Customers.txt";
-				 try {
-			            // Assume default encoding.
-			            FileWriter fileWriter =
-			                new FileWriter(fileName);
-
-			            // Always wrap FileWriter in BufferedWriter.
-			            BufferedWriter bufferedWriter =
-			                new BufferedWriter(fileWriter);
-
-			            // Note that write() does not automatically
-			            // append a newline character.
-			            bufferedWriter.write(name.getText());
-			            bufferedWriter.newLine();
-			            bufferedWriter.write(username.getText());
-			            bufferedWriter.newLine();
-			            bufferedWriter.write(password.getText());
-			            bufferedWriter.newLine();
-			            bufferedWriter.write(Mobile.getText());
-
-			            // Always close files.
-			            bufferedWriter.close();
-			        }
-			        catch(IOException ex) {
-			            System.out.println(
-			                "Error writing to file '"
-			                + fileName + "'");
-			            // Or we could just do this:
-			            // ex.printStackTrace();
-			        }
-			}
+//				//Customer c=new Customer(name.getText(),Mobile.getText(),password.getText(),username.getText());
+//				String fileName = "Customers.txt";
+//				 try {
+//			            // Assume default encoding.
+//			            FileWriter fileWriter =
+//			                new FileWriter(fileName);
+//
+//			            // Always wrap FileWriter in BufferedWriter.
+//			            BufferedWriter bufferedWriter =
+//			                new BufferedWriter(fileWriter);
+//
+//			            // Note that write() does not automatically
+//			            // append a newline character.
+//			            bufferedWriter.write(name.getText());
+//			            bufferedWriter.newLine();
+//			            bufferedWriter.write(username.getText());
+//			            bufferedWriter.newLine();
+//			            bufferedWriter.write(password.getText());
+//			            bufferedWriter.newLine();
+//			            bufferedWriter.write(Mobile.getText());
+//
+//			            // Always close files.
+//			            bufferedWriter.close();
+//			        }
+//			        catch(IOException ex) {
+//			            System.out.println(
+//			                "Error writing to file '"
+//			                + fileName + "'");
+//			            // Or we could just do this:
+//			            // ex.printStackTrace();
+//			        }
+		}
 		});
 		btnRegister.setBounds(271, 212, 119, 38);
 		contentPane.add(btnRegister);
