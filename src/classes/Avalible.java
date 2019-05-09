@@ -1,10 +1,36 @@
 package classes;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
 public class Avalible implements Status
 {
-	public void updateStatus()
+	private String ConnectionURL = "jdbc:oracle:thin:@localhost:1521:orcl";
+	private String ConnectionUserName = "hr";
+	private String ConnectionPassword = "hr";
+	
+	public Avalible()
 	{
-		// Write Update Delivary Boy Status in DataBase.
-		System.out.println("Delivary Boy Satus is Avalible");
+		
+	}
+	public void updateStatus(String _boyName)
+	{
+		try
+		{
+		  Connection conn = DriverManager.getConnection(ConnectionURL, ConnectionUserName, ConnectionPassword);
+		  PreparedStatement preparedStatement = null;
+		  
+          String strQuery="update DELIVERYBOY set STATUS = 'A' WHERE BOYNAME = ?";
+
+          preparedStatement = conn.prepareStatement(strQuery);
+          preparedStatement.setObject(1, _boyName);
+          preparedStatement.executeQuery();
+	    }
+	    catch (Exception e)
+	    {
+	      System.err.println("D'oh! Got an exception!"); 
+	      System.err.println(e.getMessage()); 
+	    } 
 	}
 }
