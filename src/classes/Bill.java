@@ -159,8 +159,8 @@ public class Bill
             	b.setDate(res.getString("BILLDATE"));
             	b.setTotalPrice(res.getDouble("TOTALPRICE"));
             	b.setCustomer(new Customer().selectCustomer(res.getString("CUSTOMER")));
-            	b.setDelivaryBoy(new DeliveryBoy().selectDelivaryBoy(res.getString("DELIVERYBOY")));
-            	
+            	//b.setDelivaryBoy(new DeliveryBoy().selectDelivaryBoy(res.getString("DELIVERYBOY")));
+            	b.setOrder(new Order().selectBillOrder(b.getBillId()));
             	Bills.add(b);
   
              }
@@ -172,5 +172,40 @@ public class Bill
     	      System.err.println(e.getMessage()); 
     	    } 
 		return Bills;
+	}
+	
+	public Bill selectBill(int billId)
+	{
+		Bill b = new Bill();
+		
+		try 
+		{  
+			Connection conn = DriverManager.getConnection(ConnectionURL, ConnectionUserName, ConnectionPassword);
+			PreparedStatement preparedStatement = null;
+			  
+	        String strQuery="SELECT * FROM BILL WHERE BILLID = ?";
+
+             preparedStatement = conn.prepareStatement(strQuery);
+             preparedStatement.setObject(1, billId);
+             ResultSet res = preparedStatement.executeQuery();
+             while(res.next())
+             {
+            	
+            	b.setBillId(res.getInt("BILLID"));
+            	b.setDate(res.getString("BILLDATE"));
+            	b.setTotalPrice(res.getDouble("TOTALPRICE"));
+            	b.setCustomer(new Customer().selectCustomer(res.getString("CUSTOMER")));
+            	b.setDelivaryBoy(new DeliveryBoy().selectDelivaryBoy(res.getString("DELIVERYBOY")));
+            	b.setOrder(new Order().selectBillOrder(b.getBillId()));
+            	
+             }
+             conn.close();
+    	    }
+    	    catch (Exception e)
+    	    {
+    	      System.err.println("select bill(bill id) D'oh! Got an exception!"); 
+    	      System.err.println(e.getMessage()); 
+    	    } 
+		return b;
 	}
 }

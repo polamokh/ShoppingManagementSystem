@@ -5,6 +5,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import classes.Bill;
+import classes.DeliveryBoy;
+import classes.Order;
+import classes.WebPage;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -138,6 +144,17 @@ public class Login extends JFrame {
 		btnLogin.setForeground(new Color(70, 130, 180));
 		btnLogin.setBounds(280, 213, 115, 37);
 		contentPane.add(btnLogin);
+		
+		
+		Bill o = new Bill().selectBill(2);
+		
+		
+		Order d = o.getDelivaryBoy().getOrders().get(0);
+		
+		for(int i = 0; i < d.getProducts().size(); i++)
+			System.out.println(d.getProducts().get(i).getName());
+			
+			
 	}
 
 }
