@@ -90,11 +90,15 @@ public class WebPage implements Observer
 		DeliveryBoy boy = new DeliveryBoy();
 		for(int i = 0; i < allBoys.size(); i++)
 		{
-			if(allBoys.get(i).NewOrder(newOrder) == true)
+			if(allBoys.get(i).canTakeOrder() == true)
+			{
 				boy = allBoys.get(i);
+			}
 		}
 		
 		Bill customerBill = accountant.prepareBill(BillId, _customer, newOrder, boy, _date);
+		boy.NewOrder(customerBill);
+		
 		
 		allProducts = new Product().selectProduct();
 		allBoys = new DeliveryBoy().selectDelivaryBoy();

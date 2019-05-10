@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import com.sun.javafx.css.converters.StringConverter;
+
 public class DeliveryBoy {
 	
 	private String ConnectionURL = "jdbc:oracle:thin:@localhost:1521:orcl";
@@ -43,6 +45,7 @@ public class DeliveryBoy {
 			this.BoyStatus = new Avalible();
 		else
 			this.BoyStatus = new Busy();
+		Orders = _Orders;
 	}
 	
 	public String getName() {
@@ -76,18 +79,26 @@ public class DeliveryBoy {
 		Age = age;
 	}
 	
-	public boolean NewOrder(Order newOrder)
+	public void NewOrder(Bill bill)
+	{
+
+		Orders.add(bill.getOrder());
+		insertBoyOrder(bill);
+		
+		if(Orders.size() == 2)
+		{
+			BoyStatus = new Busy();
+			BoyStatus.updateStatus(this.Name);
+		}	
+			
+	}
+	
+	public boolean canTakeOrder()
 	{
 		if(BoyStatus == new Busy())
 			return false;
 		else
 		{
-			Orders.add(newOrder);
-			if(Orders.size() == 2)
-			{
-				BoyStatus = new Busy();
-				BoyStatus.updateStatus(this.Name);
-			}	
 			return true;
 		}
 	}
@@ -96,7 +107,11 @@ public class DeliveryBoy {
 	{
 		return BoyStatus;
 	}
-
+	
+	public ArrayList<Order> getOrders()
+	{
+		return Orders;
+	}
 	public void insertDelivaryBoy(DeliveryBoy _boy)
 	{
 		try
@@ -144,7 +159,7 @@ public class DeliveryBoy {
 	    } 
 	}
 	
-	/// Note this Function should edit
+	
 	public ArrayList<DeliveryBoy> selectDelivaryBoy()
 	{
 		ArrayList<DeliveryBoy> Boys = new ArrayList<DeliveryBoy>();
@@ -160,7 +175,7 @@ public class DeliveryBoy {
           while(res.next())
           {
         	  Boys.add(new DeliveryBoy(res.getString("BoyName"),res.getString("MOBILENUMBER"), res.getString("ADDRESS"),
-        			   res.getInt("AGE"), res.getString("STATUS"), new ArrayList<Order>()));
+        			   res.getInt("AGE"), res.getString("STATUS"), selectBoyOrder(res.getString("BoyName"))));
           }
           conn.close();
 	    }
@@ -175,7 +190,7 @@ public class DeliveryBoy {
 		
 	}
 	
-	/// Note this Function should edit
+	
 	public DeliveryBoy selectDelivaryBoy(String _boyName)
 	{
 		DeliveryBoy boy = new DeliveryBoy();
@@ -192,7 +207,7 @@ public class DeliveryBoy {
           while(res.next())
           {
         	  boy = new DeliveryBoy(res.getString("BOYNAME"),res.getString("MOBILENUMBER"), res.getString("ADDRESS"),
-        			   res.getInt("AGE"), res.getString("STATUS"), new ArrayList<Order>());
+        			   res.getInt("AGE"), res.getString("STATUS"), selectBoyOrder(res.getString("BoyName")));
           }
           conn.close();
 	    }
@@ -206,5 +221,60 @@ public class DeliveryBoy {
 		
 	}
 	
+	public void insertBoyOrder(Bill _bill)
+	{
+		try
+		{
+		  Connection conn = DriverManager.getConnection(ConnectionURL, ConnectionUserName, ConnectionPassword);
+		  PreparedStatement preparedStatement = null;
+		  
+          String strQuery="INSERT INTO BOYORDER VALUES (?, ?, ?)";
+
+          preparedStatement = conn.prepareStatement(strQuery);
+          preparedStatement.setObject(1, _bill.getBillId());
+          preparedStatement.setObject(2, _bill.getDelivaryBoy().getName());
+          preparedStatement.setObject(3, "W");
+          
+          preparedStatement.executeQuery();
+          
+          conn.close();
+	    }
+	    catch (Exception e)
+	    {
+	      System.err.println("Insert Boy Order D'oh! Got an exception!"); 
+	      System.err.println(e.getMessage()); 
+	    } 
+	}
+
+	public ArrayList<Order> selectBoyOrder(String _boyName)
+	{
+		ArrayList<Order> boyOrder = new ArrayList<Order>();
+		
+		
+		try
+		{
+		  Connection conn = DriverManager.getConnection(ConnectionURL, ConnectionUserName, ConnectionPassword);
+		  PreparedStatement preparedStatement = null;
+		  
+          String strQuery="Select * From BOYORDER WHERE STATUS = ? and BOYNAME = ?";
+          preparedStatement = conn.prepareStatement(strQuery);
+          preparedStatement.setObject(1, "W");
+          preparedStatement.setObject(2, _boyName);
+          ResultSet res = preparedStatement.executeQuery();
+          while(res.next())
+          {
+        	  Order o = new Order().selectBillOrder(res.getInt("BILLID"));
+        	  boyOrder.add(o);
+          }
+          conn.close();
+	    }
+	    catch (Exception e)
+	    {
+	      System.err.println("select boy order  D'oh! Got an exception!"); 
+	      System.err.println(e.getMessage()); 
+	    }
+		
+		return boyOrder;
+	}
 	
 }
