@@ -1,6 +1,8 @@
 package classes;
 import java.util.List;
 
+import com.sun.glass.ui.Application;
+
 //import com.sun.org.apache.xpath.internal.axes.OneStepIterator;
 
 import java.sql.Connection;
@@ -28,6 +30,13 @@ public class Customer {
 	public Customer() {
 		onlineShopping = new WebPage();
 	}
+	
+	public Customer(String username, String password) {
+		onlineShopping = new WebPage();
+		this.username = username;
+		this.password = password;
+	}
+	
 	public Customer(String Name,String Mobile,String password,String username)
 	{
 		this.Name=Name;
@@ -108,8 +117,9 @@ public class Customer {
    	
    	public boolean login(String _userName, String _password)
    	{
-   		boolean res = checkExist(_userName, _password);
-   		return res;
+   		if(checkExist() != null)
+   			return true;
+   		return false;
    	}
    	
    	
@@ -177,21 +187,21 @@ public class Customer {
    		return allCustomer;
    	}
    	
-   	public boolean checkExist(String _userName, String _password)
+   	public Customer checkExist()
    	{
    		ArrayList<Customer> allCustomer = new Customer().selectCustomer();
    		
    		for(int i = 0; i < allCustomer.size(); i++) {
-   			if(allCustomer.get(i).GetUserName().matches(_userName))
+   			if(allCustomer.get(i).GetUserName().matches(this.username))
    			{
-   				if(allCustomer.get(i).GetPassword().matches(_password))
+   				if(allCustomer.get(i).GetPassword().matches(this.password))
    				{
-   					return true;
+   					return allCustomer.get(i);
    				}
    			}
    		}
    		
-   		return false;
+   		return null;
    	}
     
    	public void insertCustomer(Customer _customer)
@@ -215,7 +225,29 @@ public class Customer {
 	    catch (Exception e)
 	    {
 	      System.err.println("D'oh! Got an exception!"); 
-	      System.err.println(e.getMessage()); 
+	      System.err.println(e.getMessage());
+	    } 
+	}
+   	
+   	public void deleteCustomer(Customer _customer)
+   	{
+   		try
+		{
+		  Connection conn = DriverManager.getConnection(ConnectionURL, ConnectionUserName, ConnectionPassword);
+		  PreparedStatement preparedStatement = null;
+		  
+          String strQuery="DELETE FROM USERES WHERE USERNAME = ? AND USERTYPE = ?";
+
+          preparedStatement = conn.prepareStatement(strQuery);
+          preparedStatement.setObject(1, _customer.GetUserName());
+          preparedStatement.setObject(2, "CUSTOMER");
+          
+          preparedStatement.executeQuery();
+	    }
+	    catch (Exception e)
+	    {
+	      System.err.println("D'oh! Got an exception!"); 
+	      System.err.println(e.getMessage());
 	    } 
 	}
    	

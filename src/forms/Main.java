@@ -26,12 +26,14 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class Main {
 
-	private JFrame frame;
+	public JFrame frame;
 	private JTable productsTable;
-	private Customer customer;
+	private static Customer customer;
 	ArrayList<Product> products;
 	private ArrayList<String> cart = new ArrayList<String>();
 	/**
@@ -41,7 +43,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Main window = new Main();
+					Main window = new Main(customer);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,7 +55,8 @@ public class Main {
 	/**
 	 * Create the application.
 	 */
-	public Main() {
+	public Main(Customer cus) {
+		customer = cus;
 		initialize();
 	}
 
@@ -62,10 +65,12 @@ public class Main {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		JLabel lblCustomerName = new JLabel("CustomerName");
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
-			public void windowOpened(WindowEvent arg0) {
-				customer = new Customer();
+			public void windowOpened(WindowEvent arg0) {				
+				lblCustomerName.setText("Hello, " + customer.GetName() + "  ");
+				
 				products = customer.getProducts();
 
 				DefaultTableModel defaultTableModel = new DefaultTableModel();
@@ -85,7 +90,6 @@ public class Main {
 			}
 		});
 		frame.setBounds(100, 100, 786, 437);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		Box horizontalBox = Box.createHorizontalBox();
 
@@ -113,165 +117,190 @@ public class Main {
 				}
 			}
 		});
+		
+		JButton btnViewBill = new JButton("View Bill");
+		
+		JButton btnDeleteAccount = new JButton("Delete Account");
+		btnDeleteAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				customer.deleteCustomer(customer);
+				Main.this.frame.setVisible(false);
+				new Login().setVisible(true);
+			}
+		});
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
-				groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(horizontalBox, GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
-								.addGroup(groupLayout.createSequentialGroup()
-										.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
-										.addGap(4)
-										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-												.addComponent(btnAddToCart, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
-												.addComponent(btnViewCart, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
-												.addComponent(btnReturnProduct, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE))))
-						.addContainerGap())
-				);
-		groupLayout.setVerticalGroup(
-				groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-						.addComponent(horizontalBox, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addGroup(groupLayout.createSequentialGroup()
-										.addComponent(btnAddToCart)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(btnViewCart)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(btnReturnProduct))
-								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE))
-						.addContainerGap())
-				);
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(horizontalBox, GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnDeleteAccount, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(btnAddToCart, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+										.addComponent(btnViewCart, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+										.addComponent(btnReturnProduct, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE))
+									.addComponent(btnViewBill, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)))))
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addComponent(horizontalBox, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(btnDeleteAccount)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnViewBill)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnAddToCart)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnViewCart)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnReturnProduct))
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE))
+					.addContainerGap())
+		);
+		
+				JButton btnAllCategories = new JButton("All Categories");
+				btnAllCategories.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						products = customer.getProducts();
 
-		JButton btnClothes = new JButton("Clothes");
-		btnClothes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				products = customer.getCategoryProducts("Clothes");
+						DefaultTableModel defaultTableModel = new DefaultTableModel();
 
+						defaultTableModel.addColumn("Name");
+						defaultTableModel.addColumn("Description");
+						defaultTableModel.addColumn("Price");
+						defaultTableModel.addColumn("Number in Stock");
 
-				DefaultTableModel defaultTableModel = new DefaultTableModel();
-
-				defaultTableModel.addColumn("Name");
-				defaultTableModel.addColumn("Description");
-				defaultTableModel.addColumn("Price");
-				defaultTableModel.addColumn("Number in Stock");
-
-				for(Product menuComponent : products) {
-					defaultTableModel.addRow(new Object[] {
-							menuComponent.getName(), menuComponent.getDescription(),
-							menuComponent.getPrice(), menuComponent.getQuantity()
-					});
-				}
-				productsTable.setModel(defaultTableModel);
-			}
-		});
-
-		JButton btnAllCategories = new JButton("All Categories");
-		btnAllCategories.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				products = customer.getProducts();
-
-				DefaultTableModel defaultTableModel = new DefaultTableModel();
-
-				defaultTableModel.addColumn("Name");
-				defaultTableModel.addColumn("Description");
-				defaultTableModel.addColumn("Price");
-				defaultTableModel.addColumn("Number in Stock");
-
-				for(Product menuComponent : products) {
-					defaultTableModel.addRow(new Object[] {
-							menuComponent.getName(), menuComponent.getDescription(),
-							menuComponent.getPrice(), menuComponent.getQuantity()
-					});
-				}
-				productsTable.setModel(defaultTableModel);
-			}
-		});
-		horizontalBox.add(btnAllCategories);
-		horizontalBox.add(btnClothes);
-
-		JButton btnPhones = new JButton("Phones");
-		btnPhones.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				products = customer.getCategoryProducts("Phones");
-
-
-				DefaultTableModel defaultTableModel = new DefaultTableModel();
-
-				defaultTableModel.addColumn("Name");
-				defaultTableModel.addColumn("Description");
-				defaultTableModel.addColumn("Price");
-				defaultTableModel.addColumn("Number in Stock");
-
-				for(Product menuComponent : products) {
-					defaultTableModel.addRow(new Object[] {
-							menuComponent.getName(), menuComponent.getDescription(),
-							menuComponent.getPrice(), menuComponent.getQuantity()
-					});
-				}
-				productsTable.setModel(defaultTableModel);
-			}
-		});
-		horizontalBox.add(btnPhones);
-
-		JButton btnElectronics = new JButton("Electronics");
-		btnElectronics.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				products = customer.getCategoryProducts("Electronics");
+						for(Product menuComponent : products) {
+							defaultTableModel.addRow(new Object[] {
+									menuComponent.getName(), menuComponent.getDescription(),
+									menuComponent.getPrice(), menuComponent.getQuantity()
+							});
+						}
+						productsTable.setModel(defaultTableModel);
+					}
+				});
+				horizontalBox.add(btnAllCategories);
+		
+				JButton btnClothes = new JButton("Clothes");
+				btnClothes.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						products = customer.getCategoryProducts("Clothes");
 
 
-				DefaultTableModel defaultTableModel = new DefaultTableModel();
+						DefaultTableModel defaultTableModel = new DefaultTableModel();
 
-				defaultTableModel.addColumn("Name");
-				defaultTableModel.addColumn("Description");
-				defaultTableModel.addColumn("Price");
-				defaultTableModel.addColumn("Number in Stock");
+						defaultTableModel.addColumn("Name");
+						defaultTableModel.addColumn("Description");
+						defaultTableModel.addColumn("Price");
+						defaultTableModel.addColumn("Number in Stock");
 
-				for(Product menuComponent : products) {
-					defaultTableModel.addRow(new Object[] {
-							menuComponent.getName(), menuComponent.getDescription(),
-							menuComponent.getPrice(), menuComponent.getQuantity()
-					});
-				}
-				productsTable.setModel(defaultTableModel);
-			}
-		});
-		horizontalBox.add(btnElectronics);
+						for(Product menuComponent : products) {
+							defaultTableModel.addRow(new Object[] {
+									menuComponent.getName(), menuComponent.getDescription(),
+									menuComponent.getPrice(), menuComponent.getQuantity()
+							});
+						}
+						productsTable.setModel(defaultTableModel);
+					}
+				});
+				horizontalBox.add(btnClothes);
+		
+				JButton btnPhones = new JButton("Phones");
+				btnPhones.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						products = customer.getCategoryProducts("Phones");
 
-		JButton btnComputing = new JButton("Computing");
-		btnComputing.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				products = customer.getCategoryProducts("Computing");
+
+						DefaultTableModel defaultTableModel = new DefaultTableModel();
+
+						defaultTableModel.addColumn("Name");
+						defaultTableModel.addColumn("Description");
+						defaultTableModel.addColumn("Price");
+						defaultTableModel.addColumn("Number in Stock");
+
+						for(Product menuComponent : products) {
+							defaultTableModel.addRow(new Object[] {
+									menuComponent.getName(), menuComponent.getDescription(),
+									menuComponent.getPrice(), menuComponent.getQuantity()
+							});
+						}
+						productsTable.setModel(defaultTableModel);
+					}
+				});
+				horizontalBox.add(btnPhones);
+		
+				JButton btnElectronics = new JButton("Electronics");
+				btnElectronics.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						products = customer.getCategoryProducts("Electronics");
 
 
-				DefaultTableModel defaultTableModel = new DefaultTableModel();
+						DefaultTableModel defaultTableModel = new DefaultTableModel();
 
-				defaultTableModel.addColumn("Name");
-				defaultTableModel.addColumn("Description");
-				defaultTableModel.addColumn("Price");
-				defaultTableModel.addColumn("Number in Stock");
+						defaultTableModel.addColumn("Name");
+						defaultTableModel.addColumn("Description");
+						defaultTableModel.addColumn("Price");
+						defaultTableModel.addColumn("Number in Stock");
 
-				for(Product menuComponent : products) {
-					defaultTableModel.addRow(new Object[] {
-							menuComponent.getName(), menuComponent.getDescription(),
-							menuComponent.getPrice(), menuComponent.getQuantity()
-					});
-				}
-				productsTable.setModel(defaultTableModel);
-			}
-		});
-		horizontalBox.add(btnComputing);
+						for(Product menuComponent : products) {
+							defaultTableModel.addRow(new Object[] {
+									menuComponent.getName(), menuComponent.getDescription(),
+									menuComponent.getPrice(), menuComponent.getQuantity()
+							});
+						}
+						productsTable.setModel(defaultTableModel);
+					}
+				});
+				horizontalBox.add(btnElectronics);
+		
+				JButton btnComputing = new JButton("Computing");
+				btnComputing.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						products = customer.getCategoryProducts("Computing");
+
+
+						DefaultTableModel defaultTableModel = new DefaultTableModel();
+
+						defaultTableModel.addColumn("Name");
+						defaultTableModel.addColumn("Description");
+						defaultTableModel.addColumn("Price");
+						defaultTableModel.addColumn("Number in Stock");
+
+						for(Product menuComponent : products) {
+							defaultTableModel.addRow(new Object[] {
+									menuComponent.getName(), menuComponent.getDescription(),
+									menuComponent.getPrice(), menuComponent.getQuantity()
+							});
+						}
+						productsTable.setModel(defaultTableModel);
+					}
+				});
+				horizontalBox.add(btnComputing);
 
 		Component verticalStrut = Box.createVerticalStrut(20);
 		horizontalBox.add(verticalStrut);
-
-		JButton btnRegister = new JButton("Register");
-		horizontalBox.add(btnRegister);
-
-		JButton btnLogin = new JButton("Login");
-		horizontalBox.add(btnLogin);
+		
+		JButton btnLogout = new JButton("Logout");
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new Login().setVisible(true);				
+				Main.this.frame.setVisible(false);
+			}
+		});
+		
+		lblCustomerName.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		horizontalBox.add(lblCustomerName);
+		horizontalBox.add(btnLogout);
 
 		productsTable = new JTable();
 		productsTable.addMouseListener(new MouseAdapter()

@@ -62,4 +62,19 @@ INSERT INTO PRODUCT VALUES ('Shoes', 'Upper Material:Genuine Leather', 150, 10, 
 INSERT INTO PRODUCT VALUES ('T-Shirt', 'Men Crew Neck T-Shirt with Short Sleeves - DARK BLACK', 120, 15, 'Clothes');
 INSERT INTO PRODUCT VALUES ('Jacket', 'Cotton material, Zipper closure, Long Sleeve and Side pockets', 200, 5, 'Clothes');
 
+INSERT INTO PRODUCT VALUES ('Samsung','Samsung Galaxy J6+ - 6.0-inch 32GB 4G Mobile Phone - Red', 2700, 10, 'Phones');
+INSERT INTO PRODUCT VALUES ('Xiaomi','Xiaomi Redmi 7 - 6.26-inch 64GB Dual SIM 4G Mobile Phone - Eclipse Black', 3000, 8, 'Phones');
+INSERT INTO PRODUCT VALUES ('Apple','Apple iPhone 6s Plus - 32GB - Silver', 7000, 3, 'Phones');
+INSERT INTO PRODUCT VALUES ('Huawei','Huawei Y5 Lite - 5.45-inch 16GB 4G Mobile Phone - Blue', 1500, 5, 'Phones');
+
+INSERT INTO PRODUCT VALUES ('TV','Samsung UA65RU7100 - 65-inch HDR Flat 4K UHD Smart TV', 15000, 5, 'Electronics');
+INSERT INTO PRODUCT VALUES ('Receiver','Jac NGR-666 Full HD Mini Receiver', 200, 10, 'Electronics');
+INSERT INTO PRODUCT VALUES ('HDMI Cable','Generic High Speed HDMI To HDMI Cable - 3 Meters', 50, 5, 'Electronics');
+INSERT INTO PRODUCT VALUES ('PlayStation','Sony PlayStation 4 Slim - 1TB Gaming Console - Black', 6666, 3, 'Electronics');
+
+INSERT INTO PRODUCT VALUES ('Lenovo','Lenovo IdeaPad 330-15IKBR Laptop - Intel Core i7 - 8GB RAM - 2TB HDD - Onyx Black', 12000, 4, 'Computing');
+INSERT INTO PRODUCT VALUES ('Projector','Unic UC28+ Mini LED Projector Home Cinema Theater Support 1080p', 1600, 10, 'Computing');
+INSERT INTO PRODUCT VALUES ('Printer','HP DeskJet 2620 All-in-One Wireless Printer', 500, 20, 'Computing');
+INSERT INTO PRODUCT VALUES ('USB','Kingston Data Traveler DT50 USB V3.0 Flash Memory - 32 GB', 100, 30, 'Computing');
+
 COMMIT;
