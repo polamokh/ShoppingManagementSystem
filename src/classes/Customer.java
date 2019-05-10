@@ -96,7 +96,7 @@ public class Customer {
    	{
    		return onlineShopping.getAvalibleProducts();
    	}
-
+   	
    	public Bill BuyProduct(ArrayList<String> _productsName, String _date)
    	{
    		Bill newBill = onlineShopping.BuyProduct(_productsName, this, _date);
@@ -104,13 +104,13 @@ public class Customer {
    		return newBill;
    	}
    	
-   	
-   	
    	public boolean login(String _userName, String _password)
    	{
    		boolean res = checkExist(_userName, _password);
    		return res;
    	}
+   	
+   	
    	
    	public Customer selectCustomer(String _customerUserName)
    	{
@@ -133,6 +133,7 @@ public class Customer {
             	customer.SetName(res.getString("FULLNAME"));
              }
              conn.close();
+             
     	    }
     	    catch (Exception e)
     	    {
