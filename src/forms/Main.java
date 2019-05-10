@@ -79,8 +79,11 @@ public class Main {
 		});
 		
 		JButton btnMakeorder = new JButton("Add to Cart");
+		final MenuComponent clothes = new Category("Clothes");
 		btnMakeorder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Category category =new Category("Clothess");
+				category.add(new Product(clothes.getChild(productsTable.getSelectedRow()).getName(),clothes.getChild(productsTable.getSelectedRow()).getDescription(),clothes.getChild(productsTable.getSelectedRow()).getPrice(),10));
 				String name=textField.getText();
 				if(order.CheckProduct(name)==true)
 				{
@@ -139,7 +142,7 @@ public class Main {
 							.addGap(18)
 							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 288, GroupLayout.PREFERRED_SIZE))))
 		);
-		final MenuComponent clothes = new Category("Clothes");
+		
 		JButton btnClothesCategory = new JButton("Clothes");
 		btnClothesCategory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
