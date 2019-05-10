@@ -94,7 +94,8 @@ public class Login extends JFrame {
                     Customer customer=new Customer();
                     if(customer.login(username.getText(), password.getText())==true)
                     {
-                    	new Cart().setVisible(true);
+                    	JOptionPane.showMessageDialog(null,"Welcome");
+                    	//new Cart().setVisible(true);
                     }
                     else JOptionPane.showMessageDialog(null,"Wrong Username or Password");
 				   }

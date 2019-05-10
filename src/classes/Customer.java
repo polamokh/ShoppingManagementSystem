@@ -25,7 +25,9 @@ public class Customer {
 	private ArrayList<Bill> Bills = new ArrayList<Bill>();
 	WebPage onlineShopping;
 	
-	public Customer() {}
+	public Customer() {
+		onlineShopping = new WebPage();
+	}
 	public Customer(String Name,String Mobile,String password,String username)
 	{
 		this.Name=Name;
