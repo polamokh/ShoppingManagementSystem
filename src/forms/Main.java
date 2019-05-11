@@ -65,6 +65,7 @@ public class Main {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		JLabel lblCustomerName = new JLabel("CustomerName");
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
@@ -102,7 +103,7 @@ public class Main {
 		btnViewCart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
-				new Cart(cart).setVisible(true);
+				new Cart(customer, cart).setVisible(true);
 			}
 		});
 
@@ -119,6 +120,11 @@ public class Main {
 		});
 		
 		JButton btnViewBill = new JButton("View Bill");
+		btnViewBill.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new CustomerBills(customer).frame.setVisible(true);
+			}
+		});
 		
 		JButton btnDeleteAccount = new JButton("Delete Account");
 		btnDeleteAccount.addActionListener(new ActionListener() {

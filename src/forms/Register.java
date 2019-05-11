@@ -50,7 +50,7 @@ public class Register extends JFrame {
 	 */
 	public Register() {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 534, 341);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(70, 130, 180));

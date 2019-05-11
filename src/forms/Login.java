@@ -88,12 +88,12 @@ public class Login extends JFrame {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if(comboBox.getSelectedItem()=="Customer")
+				if(comboBox.getSelectedItem().equals("Customer"))
 				{
-					Customer customer = new Customer(username.getText(), password.getText());
-					customer = customer.checkExist();
-					if(customer != null)
+					Customer customer = new Customer().selectCustomer(username.getText());
+					if(customer.GetName().isEmpty() != true)
 					{
+						customer = new Customer(customer.GetName(), customer.GetMobile(), customer.GetPassword(), customer.GetUserName());
 						JOptionPane.showMessageDialog(null,"Welcome");
 						Main mainForm = new Main(customer);
 						mainForm.frame.setVisible(true);
@@ -103,11 +103,13 @@ public class Login extends JFrame {
 				}
 				else
 				{
-					Manager manger=new Manager();
-					if(manger.login(username.getText(), password.getText())==true)
+					Manager manger = new Manager(username.getText(), password.getText());
+					
+					if(manger.login(username.getText(), password.getText()))
 					{
 						JOptionPane.showMessageDialog(null,"Welcome");
-						//Manger Form open
+						new managerForm(manger).frmManagerForm.setVisible(true);
+						Login.this.setVisible(false);
 					}
 					else JOptionPane.showMessageDialog(null,"Wrong Username or Password");
 				}

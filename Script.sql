@@ -55,7 +55,7 @@ CREATE TABLE BOYORDER
 
 Create table CreditCard
 (Nameoncard varchar(50),
-Number varchar2(20),
+Numberr varchar2(20),
 CVV varchar2(20),
 Expiration_date varchar2(20));
 
@@ -84,5 +84,10 @@ INSERT INTO PRODUCT VALUES ('Lenovo','Lenovo IdeaPad 330-15IKBR Laptop - Intel C
 INSERT INTO PRODUCT VALUES ('Projector','Unic UC28+ Mini LED Projector Home Cinema Theater Support 1080p', 1600, 10, 'Computing');
 INSERT INTO PRODUCT VALUES ('Printer','HP DeskJet 2620 All-in-One Wireless Printer', 500, 20, 'Computing');
 INSERT INTO PRODUCT VALUES ('USB','Kingston Data Traveler DT50 USB V3.0 Flash Memory - 32 GB', 100, 30, 'Computing');
+
+INSERT INTO USERES VALUES ('safwan','safwan', 'Safwan', '0154545624', 'MANAGER');
+INSERT INTO USERES VALUES ('pola','pola', 'Pola Mikhail', '0128975554', 'CUSTOMER');
+INSERT INTO DELIVERYBOY VALUES ('tony','011756465', '21 st el abbassya', 21, 'A');
+
 
 COMMIT;

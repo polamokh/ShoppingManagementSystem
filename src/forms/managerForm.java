@@ -1,64 +1,34 @@
 package forms;
 
-import java.awt.EventQueue;
-import java.awt.Frame;
-
-import javax.swing.JFrame;
-import java.awt.Dimension;
-import javax.swing.JToolBar;
-import java.awt.BorderLayout;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.border.CompoundBorder;
 import java.awt.Color;
-import java.awt.GridLayout;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
-import classes.Avalible;
+import javax.swing.DefaultListModel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
+
 import classes.DeliveryBoy;
 import classes.Manager;
 import classes.MenuComponent;
 import classes.Product;
-
-import com.jgoodies.forms.layout.FormSpecs;
-import javax.swing.JTree;
-import javax.swing.JList;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.CardLayout;
-import java.awt.Panel;
-import java.awt.Button;
-import java.awt.Canvas;
-import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
-import javax.swing.JDesktopPane;
-import javax.swing.JLayeredPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JScrollPane;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JTextPane;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JLabel;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-
-import java.awt.Component;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.ListSelectionEvent;
-import java.awt.SystemColor;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class managerForm {
 

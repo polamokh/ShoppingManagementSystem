@@ -17,9 +17,9 @@ public class WebPage implements Observer
 	{
 		allProducts = new Product().selectProduct();
 		allCategory = new Category().selectCategory();
-		allBills = new Bill().selectBill();
 		allBoys = new DeliveryBoy().selectDelivaryBoy();
 		accountant = new Accountant();
+		allBills = accountant.getBills();
 	}
 	
 	public void update(Product product)
@@ -100,11 +100,11 @@ public class WebPage implements Observer
 		boy.NewOrder(customerBill);
 		
 		
-		allProducts = new Product().selectProduct();
-		allBoys = new DeliveryBoy().selectDelivaryBoy();
-		allBills = new Bill().selectBill();
+		//allProducts = new Product().selectProduct();
+		//allBoys = new DeliveryBoy().selectDelivaryBoy();
+		//allBills = new Bill().selectBill();
+		//allBills.add(customerBill);
 		
-		allBills.add(customerBill);
 		return customerBill;
 	}
 	
@@ -193,6 +193,18 @@ public class WebPage implements Observer
 	{
 		return accountant.getBills();
 		
+	}
+	
+	public ArrayList<Bill> getCustomerBills(Customer cus)
+	{
+		ArrayList<Bill> customerBills = new ArrayList<Bill>();
+		for(int i = 0; i < allBills.size(); i++) {
+			if(allBills.get(i).getCustomer().GetName().equals(cus.GetName())) {
+				customerBills.add(allBills.get(i));
+			}
+		}
+		
+		return customerBills;
 	}
 	
 	public void updateQuantity(String _productName, int NewQuantity)

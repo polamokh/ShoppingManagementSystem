@@ -33,7 +33,7 @@ public class Cart extends JFrame {
 	private JPanel contentPane;
 	private Customer customer;
 	private Order order;
-	private static ArrayList<String> cart;
+	private ArrayList<String> cart;
 	private JTable cartTable;
 
 	/**
@@ -43,7 +43,7 @@ public class Cart extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Cart frame = new Cart(cart);
+					Cart frame = new Cart();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,7 +55,17 @@ public class Cart extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Cart(ArrayList<String> cart) {
+	public Cart(Customer cus, ArrayList<String> cart) {
+		this.customer = cus;
+		this.cart = cart;
+		initialize();
+	}
+
+	public Cart() {
+		initialize();
+	}
+
+	public void initialize() {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent arg0) {
@@ -71,8 +81,7 @@ public class Cart extends JFrame {
 				cartTable.setModel(defaultTableModel);
 			}
 		});
-		this.cart = cart;
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 476, 342);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -83,7 +92,7 @@ public class Cart extends JFrame {
 		JButton btnBuy = new JButton("Buy");
 		btnBuy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Payment payy=new Payment();
+				Payment payy=new Payment(customer, cart);
 				payy.setVisible(true);
 			}
 		});

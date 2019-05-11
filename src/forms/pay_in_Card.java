@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import classes.Card;
+import classes.Customer;
+import classes.Product;
 
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -13,7 +15,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.List;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 
@@ -25,6 +30,9 @@ public class pay_in_Card extends JFrame {
 	private JTextField CVV;
 	private JTextField date;
 
+	Customer customer;
+	ArrayList<String> products;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -45,7 +53,16 @@ public class pay_in_Card extends JFrame {
 	 * Create the frame.
 	 */
 	public pay_in_Card() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		initialize();
+	}
+	
+	public pay_in_Card(Customer cus, ArrayList<String> products) {
+		this.customer = cus;
+		this.products = products;
+		initialize();
+	}
+	
+	public void initialize() {
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -56,18 +73,17 @@ public class pay_in_Card extends JFrame {
 		btnDone.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
-				
-		
 				Card card=new Card(name.getText(),number.getText(),CVV.getText(),date.getText());
 				card.insertCard(card);
 				
+				customer.BuyProduct(products, LocalDate.now().toString());
+				products.clear();
+				
 				JOptionPane.showMessageDialog(null, "Done Successfully");
-				
-				
 			}
 		});
 		btnDone.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnDone.setBounds(308, 215, 97, 25);
+		btnDone.setBounds(327, 225, 97, 25);
 		contentPane.add(btnDone);
 
 		name = new JTextField();
@@ -107,7 +123,7 @@ public class pay_in_Card extends JFrame {
 
 		JLabel lblNewLabel_1 = new JLabel("Expiration Date");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_1.setBounds(28, 182, 117, 16);
+		lblNewLabel_1.setBounds(28, 181, 117, 16);
 		contentPane.add(lblNewLabel_1);
 	}
 }
