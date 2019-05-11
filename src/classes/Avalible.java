@@ -23,21 +23,6 @@ public class Avalible implements Status
 	
 	public void updateStatus(String _boyName)
 	{
-		try
-		{
-		  Connection conn = DriverManager.getConnection(ConnectionURL, ConnectionUserName, ConnectionPassword);
-		  PreparedStatement preparedStatement = null;
-		  
-          String strQuery="update DELIVERYBOY set STATUS = 'A' WHERE BOYNAME = ?";
-
-          preparedStatement = conn.prepareStatement(strQuery);
-          preparedStatement.setObject(1, _boyName);
-          preparedStatement.executeQuery();
-	    }
-	    catch (Exception e)
-	    {
-	      System.err.println("D'oh! Got an exception!"); 
-	      System.err.println(e.getMessage()); 
-	    } 
+		new Controls().updateStatus(_boyName, "A");
 	}
 }

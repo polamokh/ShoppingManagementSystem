@@ -127,7 +127,7 @@ public class Main {
 		JButton btnDeleteAccount = new JButton("Delete Account");
 		btnDeleteAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				customer.deleteCustomer(customer);
+				new Controls().deleteCustomer(customer);
 				Main.this.frame.setVisible(false);
 				new Login().setVisible(true);
 			}

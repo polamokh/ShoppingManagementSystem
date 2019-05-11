@@ -14,8 +14,6 @@ public interface MenuComponent {
 	public abstract String getDescription();
 	public abstract double getPrice();
 	public abstract int getQuantity();
-	public abstract void insertProduct(MenuComponent _product, String _category);
-	public abstract void deleteProduct(String _productName);
     
 }
 

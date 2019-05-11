@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import classes.Controls;
 import classes.Customer;
 import classes.Manager;
 
@@ -90,7 +91,7 @@ public class Login extends JFrame {
 
 				if(comboBox.getSelectedItem().equals("Customer"))
 				{
-					Customer customer = new Customer().selectCustomer(username.getText());
+					Customer customer = new Controls().selectCustomer(username.getText());
 					if(customer.GetName().isEmpty() != true)
 					{
 						customer = new Customer(customer.GetName(), customer.GetMobile(), customer.GetPassword(), customer.GetUserName());

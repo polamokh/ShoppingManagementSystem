@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import classes.Card;
+import classes.Controls;
 import classes.Customer;
 import classes.Product;
 
@@ -74,7 +75,7 @@ public class pay_in_Card extends JFrame {
 			
 			public void actionPerformed(ActionEvent arg0) {
 				Card card=new Card(name.getText(),number.getText(),CVV.getText(),date.getText());
-				card.insertCard(card);
+				new Controls().insertCard(card);
 				
 				customer.BuyProduct(products, LocalDate.now().toString());
 				products.clear();
