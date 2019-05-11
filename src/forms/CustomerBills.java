@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,6 +24,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CustomerBills {
 
@@ -111,6 +115,30 @@ public class CustomerBills {
 		
 		JLabel lblProducts = new JLabel("Products");
 		lblProducts.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		
+		JButton btnReturnBill = new JButton("Return Bill");
+		btnReturnBill.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				boolean res = false;
+				for(int i = 0; i < allBills.size(); i++)
+				{
+					if(allBills.get(i).getBillId() == Integer.valueOf(billsTable.getModel().getValueAt(billsTable.getSelectedRow(),0).toString()))
+					{
+						res = customer.returnBill(allBills.get(i));
+						break;
+					}
+				}
+				
+				if(res == true)
+					JOptionPane.showMessageDialog(null,"Done");
+				else
+					JOptionPane.showMessageDialog(null,"You Can not return this Bill");
+				
+				frame.setVisible(false);
+				frame.dispose();
+			}
+		});
+		btnReturnBill.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -123,19 +151,24 @@ public class CustomerBills {
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(productsTable, GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
 						.addComponent(lblProducts))
-					.addContainerGap(245, Short.MAX_VALUE))
+					.addGap(18)
+					.addComponent(btnReturnBill, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblBills)
-						.addComponent(lblProducts, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(productsTable, GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
-						.addComponent(billsTable, GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE))
+						.addComponent(btnReturnBill)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblBills)
+								.addComponent(lblProducts, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(productsTable, GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+								.addComponent(billsTable, GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE))))
 					.addContainerGap())
 		);
 		frame.getContentPane().setLayout(groupLayout);

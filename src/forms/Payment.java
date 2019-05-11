@@ -4,9 +4,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import org.eclipse.swt.widgets.DateTime;
+//import org.eclipse.swt.widgets.DateTime;
 
-import com.ibm.icu.text.DateFormat;
+//import com.ibm.icu.text.DateFormat;
 
 import classes.Bill;
 import classes.Customer;
@@ -74,9 +74,12 @@ public class Payment extends JFrame {
 		btnPay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				customer.BuyProduct(products, LocalDate.now().toString());
+				customer.BuyProduct(products, "1-jun-2019");
 				products.clear();
 				JOptionPane.showMessageDialog(null, "Done");
+				
+				frame.setVisible(false);
+				frame.dispose();
 			}
 		});
 		contentPane.setLayout(null);

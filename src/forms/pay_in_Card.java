@@ -80,6 +80,11 @@ public class pay_in_Card extends JFrame {
 				products.clear();
 				
 				JOptionPane.showMessageDialog(null, "Done Successfully");
+				
+				pay_in_Card frame = new pay_in_Card();
+				frame.setVisible(false);
+			
+				
 			}
 		});
 		btnDone.setFont(new Font("Tahoma", Font.BOLD, 15));

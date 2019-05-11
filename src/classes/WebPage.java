@@ -3,6 +3,7 @@ package classes;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class WebPage implements Observer 
@@ -248,6 +249,25 @@ public class WebPage implements Observer
 	public void register(Manager _manager)
 	{
 		new Manager().insertManager(_manager);
+	}
+	
+	public boolean returnBill(Bill bill)
+	{	
+		//if(LocalDate.parse(bill.getDate().toString()).getDayOfMonth() + 14 > LocalDate.now().getDayOfMonth())
+		//{
+			Order billOrder = bill.getOrder();
+			for(int i = 0; i < billOrder.getProducts().size(); i++)
+			{
+				String productName = billOrder.getProducts().get(i).getName();
+				int quantity = billOrder.getProducts().get(i).getQuantity();
+				
+				billOrder.getProducts().get(i).updateStock(productName, 1);
+			}
+			
+			bill.deleteBill(bill.getBillId());
+			return true;
+		//}
+		//return false;
 	}
 
 }
