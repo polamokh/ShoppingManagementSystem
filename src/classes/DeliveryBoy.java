@@ -95,7 +95,7 @@ public class DeliveryBoy {
 	
 	public boolean canTakeOrder()
 	{
-		if(BoyStatus == new Busy())
+		if(BoyStatus.ToString().matches("Busy"))
 			return false;
 		else
 		{

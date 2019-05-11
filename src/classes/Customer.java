@@ -123,7 +123,11 @@ public class Customer {
 		return res;	   			
 	}
 
-
+	public boolean returnBill(Bill bill)
+	{
+		boolean res = onlineShopping.returnBill(bill);
+		return res;
+	}
 
 	public Customer selectCustomer(String _customerUserName)
 	{

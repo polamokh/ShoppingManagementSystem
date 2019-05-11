@@ -139,7 +139,42 @@ public class Bill
 			System.err.println(e.getMessage()); 
 		} 
 	}
-
+	public void deleteBill(int _billId)
+	{
+		try
+		{
+		  Connection conn = DriverManager.getConnection(ConnectionURL, ConnectionUserName, ConnectionPassword);
+		  PreparedStatement preparedStatement = null;
+          String strQuery="DELETE FROM BILLPRODUCT WHERE BILLID = ?";
+          preparedStatement = conn.prepareStatement(strQuery);
+          preparedStatement.setObject(1, _billId);
+          preparedStatement.executeQuery();
+          conn.close();
+          
+          conn = DriverManager.getConnection(ConnectionURL, ConnectionUserName, ConnectionPassword);
+		  preparedStatement = null;
+          strQuery="DELETE FROM BOYORDER WHERE BILLID = ?";
+          preparedStatement = conn.prepareStatement(strQuery);
+          preparedStatement.setObject(1, _billId);
+          preparedStatement.executeQuery();
+          conn.close();
+          
+          conn = DriverManager.getConnection(ConnectionURL, ConnectionUserName, ConnectionPassword);
+		  preparedStatement = null;
+          strQuery="DELETE FROM BILL WHERE BILLID = ?";
+          preparedStatement = conn.prepareStatement(strQuery);
+          preparedStatement.setObject(1, _billId);
+          preparedStatement.executeQuery();
+          conn.close();
+          
+    
+	    }
+	    catch (Exception e)
+	    {
+	      System.err.println("delete Bill D'oh! Got an exception!"); 
+	      System.err.println(e.getMessage()); 
+	    } 
+	}
 	public ArrayList<Bill> selectBill()
 	{
 		ArrayList<Bill> Bills = new ArrayList<Bill>();

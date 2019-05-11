@@ -97,8 +97,6 @@ public class Main {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setViewportBorder(null);
 
-		JButton btnReturnProduct = new JButton("Return Product");
-
 		JButton btnViewCart = new JButton("View Cart");
 		btnViewCart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
@@ -142,15 +140,14 @@ public class Main {
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addComponent(horizontalBox, GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
+							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(btnDeleteAccount, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
 								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 										.addComponent(btnAddToCart, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
-										.addComponent(btnViewCart, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
-										.addComponent(btnReturnProduct, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE))
+										.addComponent(btnViewCart, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE))
 									.addComponent(btnViewBill, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)))))
 					.addContainerGap())
 		);
@@ -161,15 +158,13 @@ public class Main {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnDeleteAccount)
-							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnViewBill)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnAddToCart)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnViewCart)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnReturnProduct))
+							.addComponent(btnDeleteAccount))
 						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE))
 					.addContainerGap())
 		);
