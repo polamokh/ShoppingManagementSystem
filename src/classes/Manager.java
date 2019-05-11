@@ -111,7 +111,11 @@ public class Manager
 	{
 		return onlineShopping.getBills();
 	}
-
+	public void updateStock(String _productName, int NewQuantity)
+	{
+		onlineShopping.updateQuantity(_productName, NewQuantity);
+	}
+	
 	public void addDelivayBoy(DeliveryBoy _boy)
 	{
 		onlineShopping.addDelivayBoy(_boy);

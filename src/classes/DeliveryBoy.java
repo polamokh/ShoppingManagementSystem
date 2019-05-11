@@ -41,7 +41,7 @@ public class DeliveryBoy {
 		this.Mobile = _mobile;
 		this.Age = _age;
 		this.Orders = _Orders;
-		if(_Status == "A")
+		if(_Status.matches("A"))
 			this.BoyStatus = new Avalible();
 		else
 			this.BoyStatus = new Busy();
@@ -146,11 +146,10 @@ public class DeliveryBoy {
 		  PreparedStatement preparedStatement = null;
 		  
           String strQuery="DELETE DELIVERYBOY WHERE BOYNAME = ?";
-
           preparedStatement = conn.prepareStatement(strQuery);
           preparedStatement.setObject(1, _boyName);
-          
           preparedStatement.executeQuery();
+          
 	    }
 	    catch (Exception e)
 	    {

@@ -159,7 +159,7 @@ public class Bill
             	b.setDate(res.getString("BILLDATE"));
             	b.setTotalPrice(res.getDouble("TOTALPRICE"));
             	b.setCustomer(new Customer().selectCustomer(res.getString("CUSTOMER")));
-            	//b.setDelivaryBoy(new DeliveryBoy().selectDelivaryBoy(res.getString("DELIVERYBOY")));
+            	b.setDelivaryBoy(new DeliveryBoy().selectDelivaryBoy(res.getString("DELIVERYBOY")));
             	b.setOrder(new Order().selectBillOrder(b.getBillId()));
             	Bills.add(b);
   
