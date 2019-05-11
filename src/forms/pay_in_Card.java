@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import classes.Card;
+
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -13,13 +16,14 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+
 public class pay_in_Card extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField name;
+	private JTextField number;
+	private JTextField CVV;
+	private JTextField date;
 
 	/**
 	 * Launch the application.
@@ -50,33 +54,41 @@ public class pay_in_Card extends JFrame {
 
 		JButton btnDone = new JButton("Done");
 		btnDone.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent arg0) {
+				
+		
+				Card card=new Card(name.getText(),number.getText(),CVV.getText(),date.getText());
+				card.insertCard(card);
+				
 				JOptionPane.showMessageDialog(null, "Done Successfully");
+				
+				
 			}
 		});
 		btnDone.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnDone.setBounds(308, 215, 97, 25);
 		contentPane.add(btnDone);
 
-		textField = new JTextField();
-		textField.setBounds(156, 34, 153, 22);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		name = new JTextField();
+		name.setBounds(156, 34, 153, 22);
+		contentPane.add(name);
+		name.setColumns(10);
 
-		textField_1 = new JTextField();
-		textField_1.setBounds(156, 82, 153, 22);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		number = new JTextField();
+		number.setBounds(156, 82, 153, 22);
+		contentPane.add(number);
+		number.setColumns(10);
 
-		textField_2 = new JTextField();
-		textField_2.setBounds(156, 131, 153, 22);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		CVV = new JTextField();
+		CVV.setBounds(156, 131, 153, 22);
+		contentPane.add(CVV);
+		CVV.setColumns(10);
 
-		textField_3 = new JTextField();
-		textField_3.setBounds(156, 180, 153, 22);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
+		date = new JTextField();
+		date.setBounds(156, 180, 153, 22);
+		contentPane.add(date);
+		date.setColumns(10);
 
 		JLabel lblCardNumber = new JLabel("Name on Card");
 		lblCardNumber.setFont(new Font("Tahoma", Font.BOLD, 15));

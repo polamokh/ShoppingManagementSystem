@@ -79,7 +79,7 @@ public class Register extends JFrame {
 				WebPage onlineshopping = new WebPage();
 				Customer customer=new Customer(name.getText(),Mobile.getText(),password.getText(),username.getText());
 				onlineshopping.register(customer);
-				
+	
 				Register.this.setVisible(false);
 			}
 		});
