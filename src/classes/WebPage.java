@@ -120,6 +120,18 @@ public class WebPage implements Observer
 	public void addProduct(Product _product, String _categoryName) 
 	{
 		allProducts.add(_product);
+		MenuComponent category;
+		
+		for(int i = 0; i < allCategory.size(); i++)
+		{
+			if(allCategory.get(i).getName().matches(_categoryName))
+			{
+				category = allCategory.get(i);
+				allCategory.remove(i);
+				category.add(_product);
+				allCategory.add(category);
+			}
+		}
 		new Product().insertProduct(_product, _categoryName);
 	}
 	
@@ -138,11 +150,12 @@ public class WebPage implements Observer
 
 	public void RemoveProduct(String _productName)
 	{
+		
 		for(int i = 0; i < allProducts.size(); i++)
 		{
 			if(allProducts.get(i).getName().matches(_productName))
 			{
-				allProducts.remove(i);
+				allProducts.remove(allProducts.get(i));
 			}
 		}
 		new Product().deleteProduct(_productName);
@@ -150,24 +163,28 @@ public class WebPage implements Observer
 	
 	public void RemoveCategory(String _categoryName)
 	{
-		MenuComponent category = new Category();
+		int index = 0;
+		boolean exist = false;
 		
 		for(int i = 0; i < allCategory.size(); i++)
 		{
 			if( allCategory.get(i).getName().matches(_categoryName))
 			{
-				category = allCategory.get(i);
-				 allCategory.remove(i);
+				exist = true;
+				index = i;
 			}
 		}
 		
-		for(int i = 0; i < category.getProducts().size(); i++)
+		if(exist == true)
 		{
-			RemoveProduct(category.getProducts().get(i).getName());
+			for(int i = 0; i <  allCategory.get(index).getProducts().size(); i++)
+			{
+				RemoveProduct(allCategory.get(index).getProducts().get(i).getName());
+			}
+			
+			allCategory.remove(index);
+			new Category().deleteCategory(_categoryName);
 		}
-		
-		new Category().deleteCategory(_categoryName);
-		
 		
 	}
 	
@@ -177,7 +194,19 @@ public class WebPage implements Observer
 		return accountant.getBills();
 		
 	}
-
+	
+	public void updateQuantity(String _productName, int NewQuantity)
+	{
+		for(int i = 0; i < allProducts.size(); i++)
+		{
+			if(allProducts.get(i).getName().matches(_productName))
+			{
+				allProducts.get(i).updateStock(allProducts.get(i).getName(), NewQuantity);
+				break;
+			}
+		}
+		
+	}
 	public void addDelivayBoy(DeliveryBoy _boy)
 	{
 		allBoys.add(_boy);
