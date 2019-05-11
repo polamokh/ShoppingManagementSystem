@@ -81,6 +81,12 @@ public class Cart extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 
 		JButton btnBuy = new JButton("Buy");
+		btnBuy.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Payment payy=new Payment();
+				payy.setVisible(true);
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 				gl_contentPane.createParallelGroup(Alignment.LEADING)
