@@ -5,11 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
 public  class Card implements Payment_method
-{
-	private String ConnectionURL = "jdbc:oracle:thin:@localhost:1521:orcl";
-	private String ConnectionUserName = "hr";
-	private String ConnectionPassword = "hr";
-	
+{	
     private  String Name_on_Card;
     private  String Number;
     private  String CVV;
@@ -60,29 +56,6 @@ public  class Card implements Payment_method
     public void pay(int money) {
         System.out.println(money + "paid with debit/credit card" );
     }
-    public void insertCard(Card _Card)
-   	{
-   		try
-		{
-		  Connection conn = DriverManager.getConnection(ConnectionURL, ConnectionUserName, ConnectionPassword);
-		  PreparedStatement preparedStatement = null;
-		  
-          String strQuery="INSERT INTO CreditCard VALUES (?, ?, ?, ?)";
-
-          preparedStatement = conn.prepareStatement(strQuery);
-          preparedStatement.setObject(1,  _Card.getName_on_Card());
-          preparedStatement.setObject(2,  _Card.getNumber());
-          preparedStatement.setObject(3,  _Card.getCVV());
-          preparedStatement.setObject(4,  _Card.getExpiration_Date());
-       
-          
-          preparedStatement.executeQuery();
-	    }
-	    catch (Exception e)
-	    {
-	      System.err.println("D'oh! Got an exception!"); 
-	      System.err.println(e.getMessage()); 
-	    } 
-	}
-	}
+    
+}
     
