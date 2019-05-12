@@ -17,6 +17,7 @@ import classes.Product;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.swing.JTable;
@@ -119,18 +120,27 @@ public class CustomerBills {
 		JButton btnReturnBill = new JButton("Return Bill");
 		btnReturnBill.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				int returnBillIndex = 0;
 				boolean res = false;
 				for(int i = 0; i < allBills.size(); i++)
 				{
 					if(allBills.get(i).getBillId() == Integer.valueOf(billsTable.getModel().getValueAt(billsTable.getSelectedRow(),0).toString()))
 					{
-						res = customer.returnBill(allBills.get(i));
+						try {
+							res = customer.returnBill(allBills.get(i));
+							returnBillIndex = i;
+						} catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						break;
 					}
 				}
 				
-				if(res == true)
+				if(res == true) {
 					JOptionPane.showMessageDialog(null,"Done");
+					customer.removeBill(allBills.get(returnBillIndex));
+				}
 				else
 					JOptionPane.showMessageDialog(null,"You Can not return this Bill");
 				

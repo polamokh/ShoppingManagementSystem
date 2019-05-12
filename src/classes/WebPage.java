@@ -3,8 +3,11 @@ package classes;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class WebPage implements Observer 
 {
@@ -190,6 +193,11 @@ public class WebPage implements Observer
 		return customerBills;
 	}
 	
+	public boolean removeCustomerBill(Bill bill)
+	{
+		return allBills.remove(bill);
+	}
+	
 	public void updateQuantity(String _productName, int NewQuantity){
 		for(int i = 0; i < allProducts.size(); i++){
 			if(allProducts.get(i).getName().matches(_productName)){
@@ -253,10 +261,16 @@ public class WebPage implements Observer
 		return null;
 	}
 	
-	public boolean returnBill(Bill bill)
+	public boolean returnBill(Bill bill) throws ParseException
 	{	
-		//if(LocalDate.parse(bill.getDate().toString()).getDayOfMonth() + 14 > LocalDate.now().getDayOfMonth())
-		//{
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy"); 
+		Date validBillDate = formatter.parse(bill.getDate());
+		
+		String todayStr = LocalDate.now().getDayOfMonth() + "-" + LocalDate.now().getMonth() + "-" + LocalDate.now().getYear();
+		Date today = formatter.parse(todayStr);
+		
+		if(validBillDate.getDate() + 14 > today.getDate())
+		{
 			Order billOrder = bill.getOrder();
 			for(int i = 0; i < billOrder.getProducts().size(); i++){
 				String productName = billOrder.getProducts().get(i).getName();
@@ -265,8 +279,8 @@ public class WebPage implements Observer
 			}
 			new Controls().deleteBill(bill.getBillId());
 			return true;
-		//}
-		//return false;
+		}
+		return false;
 	}
 
 }

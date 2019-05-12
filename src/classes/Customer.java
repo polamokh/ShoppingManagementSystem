@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -81,6 +82,11 @@ public class Customer {
 	{
 		return onlineShopping.getCustomerBills(cus);
 	}
+	
+	public Boolean removeBill(Bill bill)
+	{
+		return onlineShopping.removeCustomerBill(bill);
+	}
 
 	public void RemoveOrder(Bill _Bill)
 	{
@@ -109,7 +115,7 @@ public class Customer {
 		return newBill;
 	}
 
-	public boolean returnBill(Bill bill)
+	public boolean returnBill(Bill bill) throws ParseException
 	{
 		boolean res = onlineShopping.returnBill(bill);
 		return res;
@@ -117,6 +123,6 @@ public class Customer {
 	
 	public void deleteMyAccount() 
 	{
-		onlineShopping.unRegister(this.Name);
+		onlineShopping.unRegister(this.username);
 	}
 }

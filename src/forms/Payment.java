@@ -74,7 +74,11 @@ public class Payment extends JFrame {
 		btnPay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				customer.BuyProduct(products, "1-jun-2019");
+				int day = LocalDate.now().getDayOfMonth();
+				String month = LocalDate.now().getMonth().name();
+				int year = LocalDate.now().getYear();
+				
+				customer.BuyProduct(products, day + "-" + month + "-" + year);
 				products.clear();
 				JOptionPane.showMessageDialog(null, "Done");
 				
