@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import classes.Controls;
 import classes.Customer;
 import classes.Manager;
+import classes.WebPage;
 
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -91,10 +92,10 @@ public class Login extends JFrame {
 
 				if(comboBox.getSelectedItem().equals("Customer"))
 				{
-					Customer customer = new Controls().selectCustomer(username.getText());
-					if(customer.GetName().isEmpty() != true)
+					
+					Customer customer = WebPage.LoginAsCustomer(username.getText(), password.getText());
+					if(customer != null)
 					{
-						customer = new Customer(customer.GetName(), customer.GetMobile(), customer.GetPassword(), customer.GetUserName());
 						JOptionPane.showMessageDialog(null,"Welcome");
 						Main mainForm = new Main(customer);
 						mainForm.frame.setVisible(true);
@@ -104,9 +105,8 @@ public class Login extends JFrame {
 				}
 				else
 				{
-					Manager manger = new Manager(username.getText(), password.getText());
-					
-					if(manger.login(username.getText(), password.getText()))
+					Manager manger = WebPage.LoginAsManager(username.getText(), password.getText());
+					if(manger != null)
 					{
 						JOptionPane.showMessageDialog(null,"Welcome");
 						new managerForm(manger).frmManagerForm.setVisible(true);

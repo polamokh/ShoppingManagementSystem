@@ -135,24 +135,4 @@ public class Manager
 	{
 		onlineShopping.RemoveDelivaryBoy(_boyName);
 	}
-	
-	public boolean login(String _userName, String _password)
-   	{
-		boolean res = checkExist(_userName, _password);
-		return res;
-   	}
-	
-	public boolean checkExist(String _userName, String _password)
-   	{
-   		ArrayList<Manager> allManager = new Controls().selectManager();
-   		for(int i = 0; i < allManager.size(); i++) 
-   		{
-   			if(allManager.get(i).GetUserName().matches(_userName)) {
-   				if(allManager.get(i).GetPassword().matches(_password)){
-   					return true;
-   				}
-   			}
-   		}
-   		return false;
-   	}
 }

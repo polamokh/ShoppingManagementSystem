@@ -12,6 +12,9 @@ public class WebPage implements Observer
 	private ArrayList<MenuComponent> allCategory;
 	private ArrayList<Bill> allBills;
 	private ArrayList<DeliveryBoy> allBoys;
+	
+	private static ArrayList<Customer> allCustomers;
+	private static ArrayList<Manager> allmanagers;
 	private Accountant accountant;
 	
 	public WebPage()
@@ -111,9 +114,10 @@ public class WebPage implements Observer
 		new Controls().insertCustomer(_customer);
 	}
 	
-	/// Summary
-	/// Manger Function
-	// Summary
+	public void unRegister(String _customerName)
+	{
+		new Controls().deleteCustomer(_customerName);
+	}
 	
 	public void addProduct(Product _product, String _categoryName) 
 	{
@@ -219,6 +223,34 @@ public class WebPage implements Observer
 	public void register(Manager _manager)
 	{
 		new Controls().insertManager(_manager);
+	}
+	
+	public static Customer LoginAsCustomer(String userName, String password)
+	{
+		allCustomers = new Controls().selectCustomer();
+		for(int i = 0; i < allCustomers.size(); i++) {
+			if(allCustomers.get(i).GetUserName().matches(userName))
+				if(allCustomers.get(i).GetPassword().matches(password)) {
+					Customer customer = new Customer(allCustomers.get(i).GetName(), allCustomers.get(i).GetMobile(),
+							allCustomers.get(i).GetPassword(), allCustomers.get(i).GetPassword());;
+					return customer;
+				}
+		}
+		return null;
+	}
+	
+	public static Manager LoginAsManager(String userName, String password)
+	{
+		allmanagers = new Controls().selectManager();
+		for(int i = 0; i < allmanagers.size(); i++) {
+			if(allmanagers.get(i).GetUserName().matches(userName))
+				if(allmanagers.get(i).GetPassword().matches(password)) {
+					Manager managers = new Manager(allmanagers.get(i).GetName(), allmanagers.get(i).GetMobile(),
+							allmanagers.get(i).GetPassword(), allmanagers.get(i).GetPassword());;
+					return managers;
+				}
+		}
+		return null;
 	}
 	
 	public boolean returnBill(Bill bill)

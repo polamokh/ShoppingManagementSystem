@@ -296,7 +296,7 @@ public class Controls
 		} 
 	}
 
-	public void deleteCustomer(Customer _customer)
+	public void deleteCustomer(String _customerName)
 	{
 		try
 		{
@@ -306,7 +306,7 @@ public class Controls
 			String strQuery="DELETE FROM USERES WHERE USERNAME = ? AND USERTYPE = ?";
 
 			preparedStatement = conn.prepareStatement(strQuery);
-			preparedStatement.setObject(1, _customer.GetUserName());
+			preparedStatement.setObject(1, _customerName);
 			preparedStatement.setObject(2, "CUSTOMER");
 
 			preparedStatement.executeQuery();

@@ -115,25 +115,8 @@ public class Customer {
 		return res;
 	}
 	
-	public boolean login(String _userName, String _password)
-	{	   	
-		boolean res = checkExist(_userName, _password);	   		
-		return res;	   			
-	}
-
-	public boolean checkExist(String _userName, String _password)	      	 
+	public void deleteMyAccount() 
 	{
-		ArrayList<Customer> allCustomer = new Controls().selectCustomer();	   		
-		for(int i = 0; i < allCustomer.size(); i++) {	   		
-			if(allCustomer.get(i).GetUserName().matches(_userName)) {	   			
-				if(allCustomer.get(i).GetPassword().matches(_password)) {	   				
-					return true;	   					
-				}	   				
-			}	   				   	
-		}
-		return false;
+		onlineShopping.unRegister(this.Name);
 	}
-
-	
-
 }
